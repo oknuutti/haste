@@ -8,15 +8,16 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread -O3")
 
-find_package(OpenCV 3.2 REQUIRED)
+find_package(OpenCV 4.2 REQUIRED)  # was 3.2
 include_directories(${OpenCV_INCLUDE_DIRS})
 
 find_package(gflags REQUIRED)
-find_package(glog REQUIRED)
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(glog REQUIRED libglog)  # used find_package(glog REQUIRED)
 include_directories(${GLOG_INCLUDE_DIRS})
 
 set(EIGEN3_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/eigen)
-find_package(Eigen3 3.3.4 EXACT MODULE)
+find_package(Eigen3 3.4.0 EXACT MODULE)   # was 3.3.4, which wouldn't likely work
 include_directories(${EIGEN3_INCLUDE_DIR})
 
 message(STATUS "Found Eigen headers in: ${EIGEN3_INCLUDE_DIR}")
